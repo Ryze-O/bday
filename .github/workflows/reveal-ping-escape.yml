@@ -1,30 +1,57 @@
-name: Reveal-Ping 1 — Escape Room (Discord)
+name: Reveal 1 — Escape Room (publish + ping)
 
-# Postet zur Enthüllungszeit der ERSTEN Überraschung (Escape Room) eine
-# Nachricht in den Discord-Channel. Webhook liegt SICHER im Repo-Secret.
+# Veröffentlicht zur Reveal-Zeit den GEHEIMEN Inhalt (aus Secret REVEAL_ESCAPE)
+# als reveal/escape.json und postet danach den Discord-Ping.
+# Vorher existiert die Datei NICHT -> die Seite bleibt verschlossen (kein Spoiler im Quelltext).
 #
-# Reveal: Sa 11.07.2026, 12:00 Köln (CEST) = 10:00 UTC  ->  cron "0 10 11 7 *"
-# (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2. Bei Bedarf anpassen.)
-# Geplante Actions können ein paar Minuten später starten -> Backup: workflow_dispatch.
+# Reveal: Sa 11.07.2026, 12:00 Köln (CEST) = 10:00 UTC -> cron "0 10 11 7 *".
+# (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2.)
+#
+# Sicherer Test ohne Spoiler: Actions -> diesen Workflow -> "Run workflow" ->
+# dry_run = true. Schreibt dann reveal/_test.json und postet NICHTS in Discord.
 
 on:
   schedule:
     - cron: "0 10 11 7 *"     # 10:00 UTC = 12:00 Köln  (ANPASSEN, falls Zeit sich ändert)
-  workflow_dispatch:            # manueller Start als Backup
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Test: schreibt reveal/_test.json, KEIN Discord-Ping"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
 
 jobs:
-  ping:
+  reveal:
     runs-on: ubuntu-latest
     steps:
-      - name: Discord-Reveal posten (Escape Room)
+      - uses: actions/checkout@v4
+
+      - name: Reveal-JSON veröffentlichen
+        env:
+          PAYLOAD: ${{ secrets.REVEAL_ESCAPE }}
+          DRY: ${{ github.event.inputs.dry_run }}
+        run: |
+          if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_ESCAPE fehlt."; exit 1; fi
+          mkdir -p reveal
+          if [ "$DRY" = "true" ]; then TARGET="reveal/_test.json"; else TARGET="reveal/escape.json"; fi
+          printf '%s' "$PAYLOAD" > "$TARGET"
+          jq . "$TARGET" > /dev/null   # JSON validieren
+          git config user.name "bday-bot"
+          git config user.email "bday-bot@users.noreply.github.com"
+          git add "$TARGET"
+          git commit -m "Reveal: $TARGET veröffentlicht" || { echo "nichts zu committen"; exit 0; }
+          git push
+
+      - name: Discord-Ping
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           PAGE_URL: "https://ryze-o.github.io/bday/"
         run: |
-          if [ -z "$WEBHOOK" ]; then
-            echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."
-            exit 1
-          fi
+          if [ -z "$WEBHOOK" ]; then echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."; exit 1; fi
           MESSAGE="@everyone 🔓 **Überraschung Nr. 1 ist aufgedeckt!** Es geht gleich los — schaut auf die Seite: $PAGE_URL 🎉"
           curl -fsS -H "Content-Type: application/json" \
             -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:["everyone"]}}')" \
