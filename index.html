@@ -348,7 +348,7 @@ a{color:inherit}
             <div class="t tbd">Nachts</div>
             <div class="c">
               <div class="ttl">Schlafen</div>
-              <div class="desc">Kräfte sammeln für Samstag.</div>
+              <div class="desc">Kräfte sammeln für Samstag. 3–4 Leute pennen bei Ryze (Adresse im Info-Bereich unten).</div>
             </div>
           </div>
         </div>
@@ -454,6 +454,14 @@ a{color:inherit}
     <p class="kicker">Damit nichts schiefgeht</p>
     <h2>Kontakt &amp; Kalender</h2>
     <p class="lead">Verlaufen, verspätet oder Frage? Meldet euch. Und packt euch die Termine direkt in den Kalender.</p>
+
+    <div class="card" style="margin-bottom:18px">
+      <h3>🏠 Basislager &amp; Übernachtung</h3>
+      <p class="muted">Bei Ryze pennen 3–4 Leute — und es ist unser zentraler Treffpunkt fürs Wochenende.</p>
+      <div class="addr-reveal" data-addr="UmVlc2VyIFN0ci4gNywgNTA3MzUgS8O2bG4=">
+        <button type="button" class="btn reveal-addr">Adresse anzeigen</button>
+      </div>
+    </div>
 
     <div class="grid-2">
 
@@ -729,6 +737,28 @@ const CONFIG = {
       wrap.innerHTML =
         '<a class="btn" href="tel:+' + num + '">' + telSvg + ' Anrufen</a>' +
         '<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/' + num + '">' + waSvg + ' WhatsApp</a>';
+    });
+  });
+})();
+
+/* ---------- Adresse: erst auf Klick (kodiert, UTF-8-sicher, mit Maps-Link) ---------- */
+(function(){
+  var mapSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  function b64utf8(b64){
+    var bin = atob(b64);
+    var bytes = Uint8Array.from(bin, function(c){ return c.charCodeAt(0); });
+    return new TextDecoder().decode(bytes);
+  }
+  document.querySelectorAll(".addr-reveal[data-addr]").forEach(function(wrap){
+    var btn = wrap.querySelector(".reveal-addr");
+    if (!btn) return;
+    btn.addEventListener("click", function(){
+      var addr;
+      try { addr = b64utf8(wrap.getAttribute("data-addr")); } catch(e){ return; }
+      wrap.innerHTML =
+        '<div style="font-weight:600;font-size:1.05rem;margin-bottom:.2em">' + addr + '</div>' +
+        '<a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' +
+          encodeURIComponent(addr) + '">' + mapSvg + ' In Google Maps öffnen</a>';
     });
   });
 })();
