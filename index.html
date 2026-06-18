@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ryze & Chris — Geburtstag · 10.–12. Juli 2026 · Köln</title>
+
+<!-- ===== Open Graph (Discord-Linkvorschau) ===== -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ryze & Chris — Geburtstag in Köln" />
+<meta property="og:description" content="10.–12. Juli 2026. Essen, Frühstück, Überraschungen & mehr. Alle Infos an einem Ort." />
+<meta property="og:locale" content="de_DE" />
+<!-- TODO: nach dem Deployment echte URL eintragen, z. B. https://<username>.github.io/bday/ -->
+<meta property="og:url" content="https://ryze-o.github.io/bday/" />
+<meta name="theme-color" content="#0e0d0b" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   EINFACH ÄNDERBAR: Texte/Adressen/Nummern stehen im HTML weiter unten.
+   Offene Punkte sind mit  <!-- DETAILS FOLGEN -->  markiert.
+   Kalender-Termine: siehe das CONFIG-Objekt ganz unten im <script>.
+   ============================================================ */
+:root{
+  --bg:        #0e0d0b;
+  --bg-2:      #16140f;
+  --surface:   #1c1914;
+  --surface-2: #221e17;
+  --line:      #2e2920;
+  --ink:       #f2ece1;
+  --ink-soft:  #b8ae9c;
+  --ink-faint: #847b6b;
+  --accent:    #e8a33d;   /* warmes Amber */
+  --accent-2:  #d6753a;   /* gebranntes Orange */
+  --good:      #7fb98a;
+  --radius:    18px;
+  --maxw:      980px;
+  --font-display:"Fraunces", Georgia, serif;
+  --font-body:"Hanken Grotesk", system-ui, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* feine Körnung + Lichtschimmer für Tiefe statt flacher Fläche */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(1100px 700px at 78% -8%, rgba(232,163,61,.16), transparent 60%),
+    radial-gradient(900px 600px at -10% 12%, rgba(214,117,58,.10), transparent 55%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+a{color:inherit}
+
+/* ---------- Hero ---------- */
+.hero{padding:clamp(64px,12vw,140px) 0 clamp(40px,7vw,72px);text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5em;
+  font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;
+  border:1px solid var(--line);border-radius:100px;
+  padding:.5em 1.1em;background:rgba(0,0,0,.2);
+  opacity:0;animation:rise .8s .05s both;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(3.2rem,13vw,7rem);
+  line-height:.95;
+  letter-spacing:-.02em;
+  margin:.34em 0 .12em;
+}
+.hero h1 .amp{font-style:italic;color:var(--accent);font-weight:300}
+.hero h1 span{display:inline-block;opacity:0;animation:rise .9s both}
+.hero h1 .l1{animation-delay:.12s}
+.hero h1 .l2{animation-delay:.22s}
+.hero h1 .l3{animation-delay:.32s}
+.hero .sub{
+  color:var(--ink-soft);font-size:clamp(1.05rem,2.6vw,1.4rem);
+  opacity:0;animation:rise .9s .42s both;
+}
+.hero .sub b{color:var(--ink);font-weight:600}
+
+/* ---------- Countdown ---------- */
+.countdown{
+  display:flex;justify-content:center;gap:clamp(10px,3vw,26px);
+  margin:clamp(30px,6vw,52px) auto 0;flex-wrap:wrap;
+  opacity:0;animation:rise .9s .56s both;
+}
+.cd-unit{min-width:74px}
+.cd-num{
+  font-family:var(--font-display);font-weight:500;
+  font-size:clamp(2.2rem,7vw,3.4rem);line-height:1;
+  font-variant-numeric:tabular-nums;
+  color:var(--ink);
+}
+.cd-lbl{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);margin-top:.7em;
+}
+.cd-done{
+  font-family:var(--font-display);font-style:italic;
+  font-size:clamp(1.6rem,5vw,2.4rem);color:var(--accent);
+}
+
+/* ---------- Section heads ---------- */
+.section{padding:clamp(38px,7vw,64px) 0}
+.kicker{
+  font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:.7em;
+}
+.section h2{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.9rem,5.5vw,2.8rem);letter-spacing:-.01em;
+  margin-bottom:.2em;
+}
+.section .lead{color:var(--ink-soft);max-width:46ch;margin-bottom:2.2em}
+
+/* ---------- Day timeline ---------- */
+.days{display:grid;gap:18px}
+.day{
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(22px,4vw,32px);
+  position:relative;overflow:hidden;
+}
+.day::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(var(--accent),var(--accent-2));
+}
+.day-head{
+  display:flex;align-items:baseline;gap:.7em;flex-wrap:wrap;
+  margin-bottom:1.1em;padding-bottom:1.1em;border-bottom:1px dashed var(--line);
+}
+.day-date{
+  font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2rem);
+  font-weight:500;
+}
+.day-dow{
+  font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;
+}
+.day-tag{
+  margin-left:auto;font-size:.8rem;color:var(--ink-faint);
+}
+.items{display:grid;gap:1.05em}
+.item{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:start}
+.item .t{
+  font-variant-numeric:tabular-nums;color:var(--accent);
+  font-weight:600;font-size:.95rem;padding-top:.1em;
+}
+.item .t.tbd{color:var(--ink-faint);font-weight:500}
+.item .c .ttl{font-weight:600;color:var(--ink);font-size:1.05rem}
+.item .c .desc{color:var(--ink-soft);font-size:.95rem;margin-top:.15em}
+.pill{
+  display:inline-block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);background:rgba(232,163,61,.12);
+  border:1px solid rgba(232,163,61,.3);border-radius:100px;
+  padding:.25em .8em;margin-top:.55em;font-weight:600;
+}
+.pill.soon{color:var(--ink-soft);background:rgba(255,255,255,.04);border-color:var(--line)}
+.note{
+  margin-top:.7em;font-size:.9rem;color:var(--ink-soft);
+  border-left:2px solid var(--line);padding-left:.85em;
+}
+.maplink{
+  display:inline-flex;align-items:center;gap:.45em;margin-top:.6em;
+  font-size:.9rem;font-weight:600;color:var(--accent);text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .2s,gap .2s;
+}
+.maplink:hover{border-color:var(--accent);gap:.7em}
+.maplink svg{width:15px;height:15px;flex:none}
+
+/* ---------- Top-Secret / Reveal ---------- */
+:root{--secret:#e0524a}
+.classified{
+  position:relative;
+  border:1px dashed var(--secret);
+  border-radius:14px;
+  padding:18px 18px 16px;
+  background:
+    repeating-linear-gradient(45deg,rgba(224,82,74,.05) 0 12px,transparent 12px 24px),
+    rgba(224,82,74,.04);
+  overflow:hidden;
+}
+.classified::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120px 60px at 85% 18%,rgba(224,82,74,.18),transparent 70%);
+}
+.cl-stamp{
+  position:absolute;top:14px;right:-34px;
+  transform:rotate(12deg);
+  font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  color:var(--secret);border:2px solid var(--secret);border-radius:4px;
+  padding:.25em 2.6em;opacity:.55;
+}
+.cl-ttl{
+  font-family:var(--font-display);font-weight:600;letter-spacing:.04em;
+  display:flex;align-items:center;gap:.5em;flex-wrap:wrap;color:var(--ink);
+}
+.cl-redacted{
+  color:transparent;background:var(--ink);border-radius:3px;
+  letter-spacing:-1px;user-select:none;animation:flicker 3.5s infinite;
+}
+.reveal-cd{
+  display:inline-flex;align-items:center;gap:.7em;margin-top:1em;
+  font-variant-numeric:tabular-nums;
+}
+.rc-lbl{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.rc-time{
+  font-family:var(--font-display);font-weight:600;font-size:1.35rem;color:var(--secret);
+}
+#secret-revealed .ttl{color:var(--ink)}
+.reveal-flash{animation:flash 1.2s ease}
+@keyframes flicker{0%,92%,100%{opacity:1}94%{opacity:.35}96%{opacity:.85}}
+@keyframes flash{0%{background:rgba(232,163,61,.25)}100%{background:transparent}}
+
+/* ---------- Contact + actions ---------- */
+.grid-2{display:grid;gap:18px;grid-template-columns:1fr}
+.card{
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(22px,4vw,30px);
+}
+.card h3{font-family:var(--font-display);font-weight:500;font-size:1.4rem;margin-bottom:.15em}
+.card p.muted{color:var(--ink-soft);font-size:.95rem;margin-bottom:1.3em}
+.contact{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.contact .who{min-width:108px;font-weight:600}
+.contact .who small{display:block;color:var(--ink-faint);font-weight:400;font-size:.8rem;letter-spacing:.04em}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;
+  font-size:.88rem;font-weight:600;text-decoration:none;
+  padding:.55em 1em;border-radius:100px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--ink);
+  transition:border-color .2s,background .2s,transform .12s;
+}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.btn svg{width:15px;height:15px}
+.btn.wa:hover{border-color:var(--good)}
+.btn.tbd{opacity:.5;pointer-events:none}
+.btn-lg{
+  display:inline-flex;align-items:center;gap:.6em;justify-content:center;
+  width:100%;padding:.95em 1.2em;border-radius:14px;
+  font-weight:700;font-size:1rem;text-decoration:none;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:#1a1305;border:none;cursor:pointer;
+  transition:transform .12s,box-shadow .2s;
+  box-shadow:0 10px 30px -12px rgba(232,163,61,.6);
+}
+.btn-lg:hover{transform:translateY(-2px);box-shadow:0 16px 38px -12px rgba(232,163,61,.7)}
+.cal-hint{margin-top:.9em;font-size:.82rem;color:var(--ink-faint);text-align:center}
+
+/* ---------- Footer ---------- */
+.foot{
+  text-align:center;padding:clamp(48px,9vw,90px) 0 60px;
+  color:var(--ink-faint);font-size:.9rem;
+}
+.foot .big{
+  font-family:var(--font-display);font-style:italic;font-size:clamp(1.4rem,4vw,2rem);
+  color:var(--ink-soft);margin-bottom:.4em;font-weight:300;
+}
+.divider{height:1px;background:var(--line);max-width:var(--maxw);margin:0 auto}
+
+@media(min-width:620px){
+  .grid-2{grid-template-columns:1.2fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <span class="eyebrow">Köln · 10.–12. Juli 2026</span>
+  <h1>
+    <span class="l1">Ryze</span> <span class="l2 amp">&amp;</span> <span class="l3">Chris</span>
+  </h1>
+  <p class="sub">Wir werden ein Jahr älter — und feiern das <b>ein ganzes Wochenende</b> mit euch.</p>
+
+  <div class="countdown" id="countdown" aria-label="Countdown bis zum Start">
+    <div class="cd-unit"><div class="cd-num" id="cd-d">–</div><div class="cd-lbl">Tage</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-h">–</div><div class="cd-lbl">Stunden</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-m">–</div><div class="cd-lbl">Minuten</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-s">–</div><div class="cd-lbl">Sekunden</div></div>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== PROGRAMM ===================== -->
+  <section class="section wrap" id="programm">
+    <p class="kicker">Das Wochenende</p>
+    <h2>Der Plan</h2>
+    <p class="lead">Drei Tage, ein Ort: Köln. Kommt vorbei, wann ihr könnt — die Fixpunkte sind das Frühstück und das Quiz am Samstag.</p>
+
+    <div class="days">
+
+      <!-- ---------- Freitag ---------- -->
+      <article class="day">
+        <div class="day-head">
+          <span class="day-date">10. Juli</span>
+          <span class="day-dow">Freitag</span>
+          <span class="day-tag">Ankommen &amp; Anstoßen</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="t tbd">Abds.</div>
+            <div class="c">
+              <div class="ttl">Gemeinsam essen gehen</div>
+              <div class="desc">Wir gehen mit der Runde (ca. 12 Leute) essen.</div>
+              <!-- DETAILS FOLGEN: Restaurant, Uhrzeit, Anfahrt eintragen -->
+              <span class="pill soon">Ort &amp; Uhrzeit folgen</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="t tbd">danach</div>
+            <div class="c">
+              <div class="ttl">Billard / Bowlen</div>
+              <div class="desc">Lockerer Ausklang — mal schauen, worauf wir Lust haben.</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="t tbd">Nachts</div>
+            <div class="c">
+              <div class="ttl">Schlafen</div>
+              <div class="desc">Kräfte sammeln für Samstag.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- Samstag ---------- -->
+      <article class="day">
+        <div class="day-head">
+          <span class="day-date">11. Juli</span>
+          <span class="day-dow">Samstag</span>
+          <span class="day-tag">Der große Tag</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="t">11:00</div>
+            <div class="c">
+              <div class="ttl">Frühstück in Ehrenfeld</div>
+              <div class="desc">Im „Station", Venloer Straße / Ecke Gürtel.</div>
+              <a class="maplink" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query=Station+Venloer+Stra%C3%9Fe+G%C3%BCrtel+K%C3%B6ln+Ehrenfeld">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                In Google Maps öffnen
+              </a>
+            </div>
+          </div>
+          <!-- ===== GEHEIM: Escape Room & Quiz. Inhalt steht NUR in CONFIG.secrets (unten); -->
+          <!-- ===== jeder Punkt enthüllt sich per JS zu SEINER eigenen Reveal-Zeit. ===== -->
+          <div id="secret-slots"></div>
+          <div class="item">
+            <div class="t tbd">spät</div>
+            <div class="c">
+              <div class="ttl">Evtl. weiter ins Bootshaus</div>
+              <div class="desc">Wenn alle Lust haben, ziehen wir noch weiter.</div>
+              <!-- DETAILS FOLGEN: bestätigen ob Bootshaus / Alternative -->
+              <span class="pill soon">Wird noch entschieden</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- Sonntag ---------- -->
+      <article class="day">
+        <div class="day-head">
+          <span class="day-date">12. Juli</span>
+          <span class="day-dow">Sonntag</span>
+          <span class="day-tag">Gemütlicher Abschluss</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="t tbd">Vorm.</div>
+            <div class="c">
+              <div class="ttl">Gemeinsames Frühstück 🥞</div>
+              <div class="desc">Ryze macht Pfannkuchen. Entspannt zusammen ausklingen lassen.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== KONTAKT + KALENDER ===================== -->
+  <section class="section wrap" id="infos">
+    <p class="kicker">Damit nichts schiefgeht</p>
+    <h2>Kontakt &amp; Kalender</h2>
+    <p class="lead">Verlaufen, verspätet oder Frage? Meldet euch. Und packt euch die Termine direkt in den Kalender.</p>
+
+    <div class="grid-2">
+
+      <div class="card">
+        <h3>Ansprechpartner</h3>
+        <p class="muted">Erreichbar per Anruf oder WhatsApp.</p>
+
+        <div class="contact">
+          <div class="who">Ryze<small>Levin</small></div>
+          <div class="btns">
+            <a class="btn" href="tel:+491706564595">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
+              Anrufen
+            </a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/491706564595">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.5 14c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.2-.8a11 11 0 0 1-4.6-4.1c-.4-.6-.9-1.5-.9-2.4 0-1 .5-1.4.7-1.6a.8.8 0 0 1 .6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c0 .2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.5.8 1 1.3 1.6 1.8.7.4 1 .5 1.3.6.2 0 .3 0 .5-.1l.6-.8c.2-.3.4-.2.6-.1l1.6.8c.3.1.4.2.5.3 0 .2 0 .8-.2 1.3Z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="who">Chris<small>Mitorganisator</small></div>
+          <div class="btns">
+            <!-- TODO: Chris' Nummer eintragen, dann class="tbd" entfernen + href setzen -->
+            <a class="btn tbd" aria-disabled="true">Nummer folgt</a>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="who">chrissy</div>
+          <div class="btns">
+            <a class="btn" href="tel:+4917662949604">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
+              Anrufen
+            </a>
+            <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/4917662949604">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.5 14c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.2-.8a11 11 0 0 1-4.6-4.1c-.4-.6-.9-1.5-.9-2.4 0-1 .5-1.4.7-1.6a.8.8 0 0 1 .6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c0 .2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.5.8 1 1.3 1.6 1.8.7.4 1 .5 1.3.6.2 0 .3 0 .5-.1l.6-.8c.2-.3.4-.2.6-.1l1.6.8c.3.1.4.2.5.3 0 .2 0 .8-.2 1.3Z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>In den Kalender</h3>
+        <p class="muted">Lädt eine Datei mit den festen Terminen — funktioniert auf Handy &amp; PC (Google, Apple, Outlook).</p>
+        <button class="btn-lg" id="cal-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Termine herunterladen (.ics)
+        </button>
+        <p class="cal-hint">Enthält: Frühstück Sa · Überraschungen Sa 🤫 · Frühstück So</p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <div class="big">Wir freuen uns auf euch.</div>
+  Ryze &amp; Chris · 10.–12. Juli 2026 · Köln
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG — hier zentral pflegen
+   ============================================================ */
+const CONFIG = {
+  // Start des Geburtstagswochenendes (für den Countdown)
+  startISO: "2026-07-10T18:00:00",   // Fr, 10.07. ~18:00
+
+  /* ===== GEHEIM — gestaffelte Überraschungen (Sa 11.07.) =====
+     Jeder Eintrag hat SEINE eigene Reveal-Zeit. Bis dahin sehen die Gäste nur den
+     TOP-SECRET-Teaser; danach (oder beim Neuladen nach der Zeit) blendet sich der echte
+     Inhalt ein. "revealAtISO" jeweils ~30 Min vor Start der Aktivität. */
+  secrets: [
+    {
+      revealAtISO: "2026-07-11T12:00:00",   // 30 Min vor Escape Room (12:30)
+      teaser: "Mittags wartet die <b>erste Überraschung</b> auf euch. 🤫",
+      time: "12:30",
+      title: "Escape Room: „NORA – Zwischen Leben und Tod“",
+      desc: "The Great Escape — schafft ihr es rechtzeitig raus? 🔓 (für 9 Personen, 25 € p. P.)",
+      location: "Venloer Str. 440 (Toskana-Passage), 50825 Köln",
+      mapsQuery: "The Great Escape Venloer Str. 440 Toskana-Passage 50825 Köln",
+      image: "https://www.thegreatescape.cologne/images/the-great-escape-nora-zwischen-leben-und-tod.jpg"
+    },
+    {
+      revealAtISO: "2026-07-11T20:00:00",   // 30 Min vor Quiz (20:30)
+      teaser: "Und abends folgt die <b>zweite Überraschung</b>. 🤫",
+      time: "20:30",
+      title: "Quiz im THE QUIZ ROOM",
+      desc: "Eure eigene Quizshow! 🧠 Bitte 5–10 Min vorher da sein, sonst geht Zeit ab. Kostenfreie Parkplätze vorhanden.",
+      location: "Maybachstraße 32, 50670 Köln",
+      mapsQuery: "THE QUIZ ROOM Maybachstraße 32 50670 Köln",
+      image: ""
+    }
+  ],
+
+  // Termine für den Kalender-Download (.ics) — SPOILERFREI (kein Quiz/Escape Room).
+  // Floating local time im Format YYYYMMDDTHHMMSS (Europe/Berlin).
+  events: [
+    {
+      title: "Frühstück — Ryze & Chris Geburtstag",
+      start: "20260711T110000",
+      end:   "20260711T123000",
+      location: "Station, Venloer Straße / Gürtel, Köln-Ehrenfeld",
+      desc: "Gemeinsames Frühstück zum Start in den großen Tag."
+    },
+    {
+      title: "Überraschungen 🤫 — Samstag freihalten!",
+      start: "20260711T121500",
+      end:   "20260711T230000",
+      location: "Köln",
+      desc: "Ryze & Chris haben sich was ausgedacht — mittags und abends. Mehr wird noch nicht verraten, haltet euch den Tag frei!"
+    },
+    {
+      title: "Frühstück & Pfannkuchen — Abschluss",
+      start: "20260712T110000",
+      end:   "20260712T123000",
+      location: "Köln",
+      desc: "Gemütlicher Ausklang. Ryze macht Pfannkuchen."
+    }
+  ]
+};
+
+/* ---------- Countdown ---------- */
+(function(){
+  const target = new Date(CONFIG.startISO).getTime();
+  const el = {
+    box: document.getElementById("countdown"),
+    d: document.getElementById("cd-d"),
+    h: document.getElementById("cd-h"),
+    m: document.getElementById("cd-m"),
+    s: document.getElementById("cd-s")
+  };
+  const pad = n => String(n).padStart(2, "0");
+  function tick(){
+    const diff = target - Date.now();
+    if (diff <= 0){
+      el.box.innerHTML = '<div class="cd-done">Es geht los — willkommen in Köln! 🎉</div>';
+      clearInterval(timer);
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff % 86400000 / 3600000);
+    const m = Math.floor(diff % 3600000 / 60000);
+    const s = Math.floor(diff % 60000 / 1000);
+    el.d.textContent = d;
+    el.h.textContent = pad(h);
+    el.m.textContent = pad(m);
+    el.s.textContent = pad(s);
+  }
+  const timer = setInterval(tick, 1000);
+  tick();
+})();
+
+/* ---------- Geheime Überraschungen: gestaffelte Reveals ---------- */
+(function(){
+  const secrets = CONFIG.secrets || [];
+  const host = document.getElementById("secret-slots");
+  if (!host || !secrets.length) return;
+  const pad = n => String(n).padStart(2, "0");
+  const mapSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+
+  function revealHTML(s){
+    const img = s.image
+      ? '<img src="' + s.image + '" alt="" loading="lazy" style="width:100%;max-width:340px;border-radius:12px;margin:.7em 0;border:1px solid var(--line)">'
+      : '';
+    const map = s.mapsQuery
+      ? '<a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='
+        + encodeURIComponent(s.mapsQuery) + '">' + mapSvg + ' ' + s.location + ' — Karte öffnen</a>'
+      : '';
+    return '<div class="ttl"><span style="color:var(--secret)">🔓 ' + s.title + '</span></div>'
+         + '<div class="desc">' + s.desc + '</div>' + img + map;
+  }
+
+  // Teaser-Karten aufbauen (eine pro Geheimnis)
+  secrets.forEach((s, i) => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML =
+      '<div class="t" data-slot="' + i + '">🔒</div>' +
+      '<div class="c">' +
+        '<div class="classified" data-lock="' + i + '">' +
+          '<div class="cl-stamp">streng geheim</div>' +
+          '<div class="ttl cl-ttl">TOP&nbsp;SECRET <span class="cl-redacted">████████</span></div>' +
+          '<div class="desc">' + s.teaser + '</div>' +
+          '<div class="reveal-cd"><span class="rc-lbl">Enthüllung in</span> <span class="rc-time" data-cd="' + i + '">––:––:––</span></div>' +
+        '</div>' +
+        '<div data-rev="' + i + '" hidden></div>' +
+      '</div>';
+    host.appendChild(item);
+  });
+
+  // Pro Geheimnis ein eigener Countdown + Reveal
+  secrets.forEach((s, i) => {
+    const target = new Date(s.revealAtISO).getTime();
+    const lock = host.querySelector('[data-lock="' + i + '"]');
+    const rev  = host.querySelector('[data-rev="' + i + '"]');
+    const cd   = host.querySelector('[data-cd="' + i + '"]');
+    const slot = host.querySelector('[data-slot="' + i + '"]');
+
+    function reveal(){
+      rev.innerHTML = revealHTML(s);
+      lock.hidden = true;
+      rev.hidden = false;
+      rev.classList.add("reveal-flash");
+      if (slot) slot.textContent = s.time || "🔓";
+    }
+    function tick(){
+      const diff = target - Date.now();
+      if (diff <= 0){ reveal(); clearInterval(t); return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor(diff % 86400000 / 3600000);
+      const m = Math.floor(diff % 3600000 / 60000);
+      const sec = Math.floor(diff % 60000 / 1000);
+      if (cd){
+        // Weit weg: Tage zeigen. Am Tag selbst: scharfer HH:MM:SS-Countdown.
+        cd.textContent = d >= 1
+          ? d + (d === 1 ? " Tag " : " Tagen ") + pad(h) + "h"
+          : pad(h) + ":" + pad(m) + ":" + pad(sec);
+      }
+    }
+    const t = setInterval(tick, 1000);
+    tick();
+  });
+})();
+
+/* ---------- Kalender (.ics) Download ---------- */
+(function(){
+  const btn = document.getElementById("cal-btn");
+  function esc(t){ return String(t).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n"); }
+  function buildICS(){
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//ryze-chris-bday//DE",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH"
+    ];
+    CONFIG.events.forEach((e, i) => {
+      lines.push(
+        "BEGIN:VEVENT",
+        "UID:bday-2026-" + (i+1) + "@ryze-chris",
+        "DTSTAMP:20260101T000000Z",
+        "DTSTART:" + e.start,
+        "DTEND:" + e.end,
+        "SUMMARY:" + esc(e.title),
+        "LOCATION:" + esc(e.location),
+        "DESCRIPTION:" + esc(e.desc),
+        "END:VEVENT"
+      );
+    });
+    lines.push("END:VCALENDAR");
+    // CRLF-Zeilenenden gemäß iCalendar-Standard
+    return lines.join("\r\n");
+  }
+  btn.addEventListener("click", () => {
+    const blob = new Blob([buildICS()], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "geburtstag-Ryze-chris.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  });
+})();
+</script>
+</body>
+</html>

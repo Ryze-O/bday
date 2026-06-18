@@ -1,0 +1,31 @@
+name: Reveal-Ping 2 — Quiz (Discord)
+
+# Postet zur Enthüllungszeit der ZWEITEN Überraschung (Quiz) eine
+# Nachricht in den Discord-Channel. Webhook liegt SICHER im Repo-Secret.
+#
+# Reveal: Sa 11.07.2026, 20:00 Köln (CEST) = 18:00 UTC  ->  cron "0 18 11 7 *"
+# (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2. Bei Bedarf anpassen.)
+# Geplante Actions können ein paar Minuten später starten -> Backup: workflow_dispatch.
+
+on:
+  schedule:
+    - cron: "0 18 11 7 *"     # 18:00 UTC = 20:00 Köln  (ANPASSEN, falls Zeit sich ändert)
+  workflow_dispatch:            # manueller Start als Backup
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord-Reveal posten (Quiz)
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PAGE_URL: "https://ryze-o.github.io/bday/"
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."
+            exit 1
+          fi
+          MESSAGE="@everyone 🔓 **Überraschung Nr. 2 ist aufgedeckt!** Der Abend hat es in sich — schaut auf die Seite: $PAGE_URL 🎉"
+          curl -fsS -H "Content-Type: application/json" \
+            -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:["everyone"]}}')" \
+            "$WEBHOOK"

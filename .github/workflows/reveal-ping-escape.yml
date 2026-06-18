@@ -1,0 +1,31 @@
+name: Reveal-Ping 1 — Escape Room (Discord)
+
+# Postet zur Enthüllungszeit der ERSTEN Überraschung (Escape Room) eine
+# Nachricht in den Discord-Channel. Webhook liegt SICHER im Repo-Secret.
+#
+# Reveal: Sa 11.07.2026, 12:00 Köln (CEST) = 10:00 UTC  ->  cron "0 10 11 7 *"
+# (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2. Bei Bedarf anpassen.)
+# Geplante Actions können ein paar Minuten später starten -> Backup: workflow_dispatch.
+
+on:
+  schedule:
+    - cron: "0 10 11 7 *"     # 10:00 UTC = 12:00 Köln  (ANPASSEN, falls Zeit sich ändert)
+  workflow_dispatch:            # manueller Start als Backup
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord-Reveal posten (Escape Room)
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PAGE_URL: "https://ryze-o.github.io/bday/"
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."
+            exit 1
+          fi
+          MESSAGE="@everyone 🔓 **Überraschung Nr. 1 ist aufgedeckt!** Es geht gleich los — schaut auf die Seite: $PAGE_URL 🎉"
+          curl -fsS -H "Content-Type: application/json" \
+            -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:["everyone"]}}')" \
+            "$WEBHOOK"
