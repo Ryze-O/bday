@@ -231,6 +231,41 @@ a{color:inherit}
 @keyframes flicker{0%,92%,100%{opacity:1}94%{opacity:.35}96%{opacity:.85}}
 @keyframes flash{0%{background:rgba(232,163,61,.25)}100%{background:transparent}}
 
+/* ---------- Köln-Quest ---------- */
+.quest-progress{
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+  margin-bottom:1.1em;font-weight:600;
+}
+.quest-progress b{color:var(--accent)}
+.qst{
+  border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;margin-bottom:14px;
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  transition:border-color .2s,opacity .2s;
+}
+.qst.locked{opacity:.5}
+.qst.active{border-color:var(--accent)}
+.qst .qnum{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.qst.locked .qnum{color:var(--ink-faint)}
+.qst .qriddle{margin:.5em 0 1em;color:var(--ink)}
+.qst .qlockedtxt{color:var(--ink-faint);font-size:.95rem}
+.qform{display:flex;gap:8px;flex-wrap:wrap}
+.qform input{
+  flex:1;min-width:170px;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;
+  padding:.7em 1em;color:var(--ink);font:inherit;
+}
+.qform input:focus{outline:none;border-color:var(--accent)}
+.qform .btn{cursor:pointer}
+.qwrong{color:var(--secret);font-size:.86rem;margin-top:.6em;min-height:1em}
+.qsolved .qstatus{color:var(--good);font-weight:600;font-size:.9rem;margin-bottom:.35em}
+.qsolved .qreveal{color:var(--ink-soft)}
+.qst.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.qreset{
+  background:none;border:none;color:var(--ink-faint);font:inherit;font-size:.82rem;
+  text-decoration:underline;cursor:pointer;margin-top:.4em;
+}
+.qreset:hover{color:var(--ink-soft)}
+
 /* ---------- Contact + actions ---------- */
 .grid-2{display:grid;gap:18px;grid-template-columns:1fr}
 .card{
@@ -390,8 +425,7 @@ a{color:inherit}
             <div class="t tbd">13:30<br>–20:00</div>
             <div class="c">
               <div class="ttl">Freie Zeit — spontan ✨</div>
-              <div class="desc">Bewusst offen gelassen: ausruhen, Köln erkunden, Kaffee, Café, was sich ergibt. Ein paar Ideen sammeln wir noch — Vorschläge gerne!</div>
-              <span class="pill soon">Ideen folgen</span>
+              <div class="desc">Bewusst offen gelassen: ausruhen, Köln erkunden, was sich ergibt. Lust auf etwas Action? Spielt unsere <a href="#quest" style="color:var(--accent);font-weight:600">Köln-Quest</a> 🗺️ — eine Rätseltour durch die Altstadt, Finale am Alter Markt.</div>
             </div>
           </div>
 
@@ -435,6 +469,17 @@ a{color:inherit}
       </article>
 
     </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== KÖLN-QUEST ===================== -->
+  <section class="section wrap" id="quest">
+    <p class="kicker">Für die freie Zeit am Samstag</p>
+    <h2>Die Köln-Quest 🗺️</h2>
+    <p class="lead" id="quest-intro"></p>
+    <div class="quest-progress" id="quest-progress"></div>
+    <div id="quest-host"></div>
   </section>
 
   <div class="divider"></div>
@@ -543,6 +588,52 @@ const CONFIG = {
       src: "reveal/quiz.json"
     }
   ],
+
+  /* ===== Köln-Quest — Rätselkette durch die Altstadt, Finale am Alter Markt =====
+     Lösungen sind base64-kodiert (Normalisierung: lowercase, ä/ö/ü -> ae/oe/ue,
+     ß -> ss, nur a-z0-9). Reihenfolge = laufbare Route. Frei änderbar. */
+  quest: {
+    intro: "Eine kleine Rätsel-Reise durch die Altstadt: sechs Stationen, jede Lösung schaltet die nächste frei — Finale am Alter Markt. Lauft die Route ab oder ratet aus dem Sessel (ihr seid ja gut darin 😏). Tippt den gesuchten Ort ein — Groß-/Kleinschreibung und Umlaute sind egal.",
+    stations: [
+      {
+        riddle: "Zwei gotische Türme, über 600 Jahre im Bau — der End-Boss der Kölner Skyline und euer Startpunkt. Wie heißt dieses Wahrzeichen?",
+        accept: ["ZG9t","a29lbG5lcmRvbQ==","Y29sb2duZWNhdGhlZHJhbA=="],
+        solved: "Richtig — der <b>Kölner Dom</b>! Stellt euch davor und haltet euch dann Richtung Rhein.",
+        maps: "Kölner Dom"
+      },
+      {
+        riddle: "Tausende Liebesschlösser klammern sich ans Geländer, die Schlüssel liegen längst im Rhein. An welcher Brücke steht ihr?",
+        accept: ["aG9oZW56b2xsZXJuYnJ1ZWNrZQ==","aG9oZW56b2xsZXJu"],
+        solved: "Stimmt — die <b>Hohenzollernbrücke</b>. Folgt dem Rhein flussaufwärts in die Altstadt.",
+        maps: "Hohenzollernbrücke Köln"
+      },
+      {
+        riddle: "Ein wuchtiger romanischer Turm mit vier Türmchen ringsum thront über dem Martinsviertel — älter als so mancher denkt. Welche Kirche?",
+        accept: ["Z3Jvc3NzdG1hcnRpbg==","c3RtYXJ0aW4=","Z3Jvc3NzYW5rdG1hcnRpbg=="],
+        solved: "Genau — <b>Groß St. Martin</b>. Gleich dahinter wird's bunt am Wasser.",
+        maps: "Groß St. Martin Köln"
+      },
+      {
+        riddle: "Schmale, knallbunte Giebelhäuser wie aus einem Aufbau-Strategiespiel, direkt am Rheinufer — hier wurde einst um Fisch gefeilscht. Wie heißt der Platz?",
+        accept: ["ZmlzY2htYXJrdA=="],
+        solved: "Korrekt — der <b>Fischmarkt</b>. Jetzt rein ins Herz der Altstadt.",
+        maps: "Fischmarkt Köln"
+      },
+      {
+        riddle: "Ein Reiterstandbild aus Bronze überragt einen weiten Platz; im Advent duftet hier der Glühwein. Sein Name kommt nicht von Fisch, sondern von trockenem Pferdefutter. Welcher Markt?",
+        accept: ["aGV1bWFya3Q="],
+        solved: "Ja — der <b>Heumarkt</b>. Nur noch ein paar Schritte bis zum Ziel …",
+        maps: "Heumarkt Köln"
+      },
+      {
+        riddle: "Direkt nebenan: der älteste Platz der Stadt, bunte Fassaden, Brauhäuser ringsum — und hoch oben streckt euch der „Kallendresser“ den Hintern entgegen. Wie heißt der Platz?",
+        accept: ["YWx0ZXJtYXJrdA=="],
+        solved: "🏁 <b>Geschafft — Alter Markt!</b> End-Boss besiegt. Trefft euch hier, gönnt euch ein Kölsch und sammelt die Truppe für den Abend. 🍺",
+        maps: "Alter Markt Köln",
+        final: true
+      }
+    ]
+  },
 
   // Termine für den Kalender-Download (.ics) — SPOILERFREI (kein Quiz/Escape Room).
   // Floating local time im Format YYYYMMDDTHHMMSS (Europe/Berlin).
@@ -783,6 +874,119 @@ const CONFIG = {
           encodeURIComponent(addr) + '">' + mapSvg + ' In Google Maps öffnen</a>';
     });
   });
+})();
+
+/* ---------- Köln-Quest: Rätselkette ---------- */
+(function(){
+  var q = CONFIG.quest;
+  var host = document.getElementById("quest-host");
+  var introEl = document.getElementById("quest-intro");
+  var progEl = document.getElementById("quest-progress");
+  if (!q || !host) return;
+  var KEY = "bday-quest-progress";
+  var n = q.stations.length;
+  var mapSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  if (introEl) introEl.textContent = q.intro;
+
+  function norm(s){
+    return String(s).toLowerCase()
+      .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+      .replace(/[^a-z0-9]/g,"");
+  }
+  function solvedCount(){
+    var v = parseInt(localStorage.getItem(KEY) || "0", 10);
+    if (isNaN(v) || v < 0) v = 0;
+    if (v > n) v = n;
+    return v;
+  }
+  function setSolved(v){ try { localStorage.setItem(KEY, String(v)); } catch(e){} }
+  function mapLink(query){
+    return '<a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='
+      + encodeURIComponent(query) + '">' + mapSvg + ' In Google Maps öffnen</a>';
+  }
+
+  function render(){
+    var solved = solvedCount();
+    host.innerHTML = "";
+    if (progEl){
+      progEl.innerHTML = solved >= n
+        ? "Quest abgeschlossen — <b>" + n + "/" + n + "</b> 🏁"
+        : "Station <b>" + (solved + 1) + "</b> von " + n;
+    }
+    q.stations.forEach(function(st, i){
+      var div = document.createElement("div");
+      div.className = "qst";
+      var label = (i === n - 1) ? "Finale" : ("Station " + (i + 1));
+      if (i < solved){
+        div.classList.add("qsolved");
+        div.innerHTML =
+          '<div class="qnum">' + label + ' · gelöst ✓</div>' +
+          '<div class="qreveal" style="margin-top:.5em">' + st.solved + '</div>' +
+          (st.maps ? '<div style="margin-top:.6em">' + mapLink(st.maps) + '</div>' : '');
+      } else if (i === solved){
+        div.classList.add("active");
+        div.innerHTML =
+          '<div class="qnum">' + label + '</div>' +
+          '<div class="qriddle">' + st.riddle + '</div>' +
+          '<div class="qform">' +
+            '<input type="text" placeholder="Antwort eingeben …" autocomplete="off" aria-label="Antwort">' +
+            '<button type="button" class="btn qcheck">Prüfen</button>' +
+          '</div>' +
+          '<div class="qwrong"></div>';
+      } else {
+        div.classList.add("locked");
+        div.innerHTML =
+          '<div class="qnum">' + label + '</div>' +
+          '<div class="qlockedtxt">🔒 Erst die vorige Station lösen.</div>';
+      }
+      host.appendChild(div);
+    });
+    if (solved > 0){
+      var reset = document.createElement("button");
+      reset.className = "qreset";
+      reset.textContent = "Quest zurücksetzen";
+      reset.addEventListener("click", function(){ setSolved(0); render(); });
+      host.appendChild(reset);
+    }
+    wireActive();
+  }
+
+  function wireActive(){
+    var active = host.querySelector(".qst.active");
+    if (!active) return;
+    var input = active.querySelector("input");
+    var btn = active.querySelector(".qcheck");
+    var wrong = active.querySelector(".qwrong");
+    var idx = solvedCount();
+    var st = q.stations[idx];
+
+    function attempt(){
+      var guess = norm(input.value);
+      if (!guess) return;
+      var ok = st.accept.some(function(b){
+        try { return norm(atob(b)) === guess; } catch(e){ return false; }
+      });
+      if (ok){
+        setSolved(idx + 1);
+        render();
+        var act = host.querySelector(".qst.active");
+        if (act){ act.scrollIntoView({ behavior: "smooth", block: "center" }); }
+        else {
+          var done = host.querySelectorAll(".qsolved");
+          if (done.length) done[done.length - 1].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      } else {
+        wrong.textContent = "Nicht ganz — nochmal versuchen. 🤔";
+        active.classList.remove("shake");
+        void active.offsetWidth;
+        active.classList.add("shake");
+      }
+    }
+    btn.addEventListener("click", attempt);
+    input.addEventListener("keydown", function(e){ if (e.key === "Enter") attempt(); });
+  }
+
+  render();
 })();
 </script>
 </body>
