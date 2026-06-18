@@ -322,19 +322,27 @@ a{color:inherit}
         </div>
         <div class="items">
           <div class="item">
-            <div class="t tbd">Abds.</div>
+            <div class="t">18:00</div>
             <div class="c">
-              <div class="ttl">Gemeinsam essen gehen</div>
-              <div class="desc">Wir gehen mit der Runde (ca. 12 Leute) essen.</div>
-              <!-- DETAILS FOLGEN: Restaurant, Uhrzeit, Anfahrt eintragen -->
-              <span class="pill soon">Ort &amp; Uhrzeit folgen</span>
+              <div class="ttl">Essen — Cantinetta trattoria &amp; bar</div>
+              <div class="desc">Reserviert für 10 Personen. Bitte pünktlich da sein. 🍝</div>
+              <a class="maplink" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query=Cantinetta+trattoria+%26+bar+Melateng%C3%BCrtel+15+50933+K%C3%B6ln">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Melatengürtel 15, 50933 Köln — Karte öffnen
+              </a>
             </div>
           </div>
           <div class="item">
-            <div class="t tbd">danach</div>
+            <div class="t">20:00</div>
             <div class="c">
-              <div class="ttl">Billard / Bowlen</div>
-              <div class="desc">Lockerer Ausklang — mal schauen, worauf wir Lust haben.</div>
+              <div class="ttl">Bowlen — West Bowling 🎳</div>
+              <div class="desc">2 Bahnen für eine Stunde. Direkt um die Ecke vom Restaurant.</div>
+              <a class="maplink" target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query=West+Bowling+Melateng%C3%BCrtel+21+50933+K%C3%B6ln">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Melatengürtel 21, 50933 Köln — Karte öffnen
+              </a>
             </div>
           </div>
           <div class="item">
@@ -498,7 +506,7 @@ a{color:inherit}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           Termine herunterladen (.ics)
         </button>
-        <p class="cal-hint">Enthält: Frühstück Sa · Überraschungen Sa 🤫 · Frühstück So</p>
+        <p class="cal-hint">Enthält: Fr Essen &amp; Bowlen · Frühstück Sa · Überraschungen Sa 🤫 · Frühstück So</p>
       </div>
 
     </div>
@@ -539,6 +547,20 @@ const CONFIG = {
   // Termine für den Kalender-Download (.ics) — SPOILERFREI (kein Quiz/Escape Room).
   // Floating local time im Format YYYYMMDDTHHMMSS (Europe/Berlin).
   events: [
+    {
+      title: "Essen — Cantinetta trattoria & bar (Ryze & Chris)",
+      start: "20260710T180000",
+      end:   "20260710T200000",
+      location: "Melatengürtel 15, 50933 Köln",
+      desc: "Reserviert für 10 Personen. Bitte pünktlich da sein."
+    },
+    {
+      title: "Bowlen — West Bowling",
+      start: "20260710T200000",
+      end:   "20260710T210000",
+      location: "Melatengürtel 21, 50933 Köln",
+      desc: "2 Bahnen für eine Stunde."
+    },
     {
       title: "Frühstück — Ryze & Chris Geburtstag",
       start: "20260711T110000",
