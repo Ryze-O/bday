@@ -8,7 +8,7 @@ name: Reveal 1 — Escape Room (publish + ping)
 # (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2.)
 #
 # Sicherer Test ohne Spoiler: Actions -> diesen Workflow -> "Run workflow" ->
-# dry_run = true. Schreibt dann reveal/_test.json und postet NICHTS in Discord.
+# dry_run = true. Schreibt dann reveal/test.json und postet NICHTS in Discord.
 
 on:
   schedule:
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Test: schreibt reveal/_test.json, KEIN Discord-Ping"
+        description: "Test: schreibt reveal/test.json, KEIN Discord-Ping"
         type: boolean
         default: false
 
@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_ESCAPE fehlt."; exit 1; fi
           mkdir -p reveal
-          if [ "$DRY" = "true" ]; then TARGET="reveal/_test.json"; else TARGET="reveal/escape.json"; fi
+          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/escape.json"; fi
           printf '%s' "$PAYLOAD" > "$TARGET"
           jq . "$TARGET" > /dev/null   # JSON validieren
           git config user.name "bday-bot"
