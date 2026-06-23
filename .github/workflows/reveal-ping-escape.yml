@@ -52,7 +52,7 @@ jobs:
           PAGE_URL: "https://ryze-o.github.io/bday/"
         run: |
           if [ -z "$WEBHOOK" ]; then echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."; exit 1; fi
-          MESSAGE="@everyone 🔓 **Überraschung Nr. 1 ist aufgedeckt!** Es geht gleich los — schaut auf die Seite: $PAGE_URL 🎉"
+          MESSAGE="<@&1355868395198877726> 🔓 **Überraschung Nr. 1 ist aufgedeckt!** Es geht gleich los — schaut auf die Seite: $PAGE_URL 🎉"
           curl -fsS -H "Content-Type: application/json" \
-            -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:["everyone"]}}')" \
+            -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:[],roles:["1355868395198877726"]}}')" \
             "$WEBHOOK"
