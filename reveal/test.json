@@ -1,0 +1,95 @@
+{
+  "intro": "Eine Rätsel-Reise quer durch Kölns Altstadt: neun Stationen, Finale am Alter Markt. Knifflig: Auch der Weg zur nächsten Station ist jedes Mal ein Rätsel — erst wenn ihr es knackt, wisst ihr, wohin. Vor Ort heißt es dann hinschauen, zählen, Schilder lesen, Leute fragen. Tippt eure Antwort ein (Groß-/Kleinschreibung & Umlaute egal). Festhängen? Jede Station hat einen Tipp und eine versteckte Karte.",
+  "stations": [
+    {
+      "riddle": "Euer Start überragt alles. Wer schwindelfrei ist, erklimmt den Südturm: Wie viele Stufen trennen euch vom Ausblick? Wer unten bleibt, fragt jemanden mit müden Waden — oder grübelt, es ist eine berühmte kölsche Zahl.",
+      "accept": ["NTMz"],
+      "hint": "Mehr als 500, weniger als 550 — und ein beliebtes Köln-Souvenir-Motiv.",
+      "solved": "<b>533 Stufen</b> — genau! Diese Zahl kennt in Köln fast jede:r: Seit 2009 sind es exakt 533 Stufen hinauf zur Aussichtsplattform in rund 97 m Höhe — eine kleine Mutprobe, die es sogar auf Souvenirs und Postkarten schafft. Schwindelfrei? Dann wieder runter.",
+      "link": "https://www.koelner-dom.de/erleben/der-dom-in-zahlen",
+      "linkLabel": "Der Dom in Zahlen",
+      "maps": "Kölner Dom",
+      "wayToNext": "Wendet euch dem Strom zu: Sucht das eiserne Bauwerk, an dem Verliebte ihre Treue mit tausenden Schlössern besiegeln — und stellt euch darauf. Keine Ahnung? Fragt Leute aus Köln!"
+    },
+    {
+      "riddle": "Die Brücke der tausend Liebesschwüre. <b>Aufgabe:</b> Findet ein Schloss, dessen Initialen zu jemandem aus eurer Runde passen, und macht ein Gruppenfoto damit. 🔒📸",
+      "task": true,
+      "hint": "Die meisten Schlösser hängen auf der stromaufwärtigen Seite, etwa auf Brückenmitte.",
+      "solved": "Schloss gefunden, Foto im Kasten! Weiter über den Rhein und hinein in die City.",
+      "link": "https://de.wikipedia.org/wiki/Hohenzollernbrücke",
+      "linkLabel": "Hohenzollernbrücke (Wikipedia)",
+      "maps": "Hohenzollernbrücke Köln",
+      "wayToNext": "Zurück ans linke Ufer und hinein in die Gassen. Euer Ziel trägt „Glocken“ im Namen — dort wohnt seit jeher Kölns berühmtester Duft."
+    },
+    {
+      "riddle": "Köln schenkte der Welt ein berühmtes Duftwasser. Findet das Stammhaus in der Glockengasse: Über dem Eingang prangt eine legendäre Nummer, die zum Synonym für „Eau de Cologne“ wurde. Wie lautet sie?",
+      "accept": ["NDcxMQ=="],
+      "hint": "Vierstellig. Angeblich die Hausnummer, die ein französischer Besatzungssoldat 1794 vergab.",
+      "solved": "<b>4711</b> — na klar! Das weltberühmte Kölnisch Wasser, Glockengasse 4711. Die Zahl soll auf einen französischen Besatzungssoldaten zurückgehen, der 1794 die Häuser durchnummerierte — aus der Hausnummer wurde eine Weltmarke.",
+      "link": "https://www.4711.com/",
+      "linkLabel": "Echt Kölnisch Wasser 4711",
+      "maps": "4711 Glockengasse Köln",
+      "wayToNext": "Diese Stadt hatte einst heimliche Helfer, die nachts alle Arbeit verrichteten — bis man sie vertrieb. Findet den Brunnen, der ihnen ein Denkmal setzt: Er plätschert vor einem der ältesten Brauhäuser der Stadt, ein paar Schritte abseits der großen Einkaufsmeile, die vom Dom nach Süden führt."
+    },
+    {
+      "riddle": "Vor einem berühmten Brauhaus (Am Hof) erinnert ein Brunnen an Kölns fleißigste Helfer, die nachts heimlich alle Arbeit erledigten — bis eine neugierige Schneidersfrau sie vertrieb. Womit brachte sie die kleinen Kerle zu Fall? (Ein Wort.)",
+      "accept": ["ZXJic2Vu", "ZXJic2U="],
+      "hint": "Etwas Rundes, Hartes auf der Treppe — die Wichtel rutschten aus.",
+      "solved": "<b>Erbsen</b> — richtig! Der Sage nach erledigten die Heinzelmännchen nachts heimlich die Arbeit der Kölner Handwerker. Aus Neugier streute die Schneidersfrau Erbsen auf die Treppe; die Wichtel stürzten, fühlten sich ertappt und verschwanden für immer — seither müssen die Kölner wieder selbst ran. Der Brunnen (1899/1900) erinnert an die Ballade von August Kopisch.",
+      "link": "https://de.wikipedia.org/wiki/Heinzelmännchen",
+      "linkLabel": "Heinzelmännchen (Wikipedia)",
+      "maps": "Heinzelmännchenbrunnen Köln",
+      "wayToNext": "Ein steinerner Hüne mit vier kleinen Trabanten an den Schultern bewacht seit fast 900 Jahren die Altstadt-Silhouette am Fluss — errichtet auf den Fundamenten eines römischen Lagerhauses. Findet ihn (sein Name verrät auch das Viertel)."
+    },
+    {
+      "riddle": "Ein wuchtiger romanischer Vierungsturm wacht über dem Martinsviertel. Schaut nach oben: Wie viele kleine Ecktürmchen umstehen den großen Turm?",
+      "accept": ["NA==", "dmllcg=="],
+      "hint": "An jeder Ecke genau eins.",
+      "solved": "<b>Vier</b> Ecktürmchen — korrekt! 75 m hoch, erbaut auf den Mauern eines römischen Lagerhauses (Groß St. Martin). Den markanten gotischen Mansarddach-Helm bekam der Turm um 1450/60 nach einem Sturmschaden.",
+      "link": "https://de.wikipedia.org/wiki/Groß_St._Martin",
+      "linkLabel": "Groß St. Martin (Wikipedia)",
+      "maps": "Groß St. Martin Köln",
+      "wayToNext": "Geht hinab zum Ufer, zu dem schmalen Platz mit den knallbunten Giebelhäuschen. Sein Name verrät, was hier im Mittelalter über die Theke ging: etwas Silbriges, das im Rhein wie in der Nordsee schwimmt."
+    },
+    {
+      "riddle": "Am bunten Plätzchen direkt am Rhein, wo einst mit Hering und Stockfisch gehandelt wurde, steht ein historisches Haus mit grazilem Treppenturm. Wie heißt dieses Gebäude? (Notfalls jemanden fragen oder ein Schild suchen.)",
+      "accept": ["c3RhcGVsaGF1cw==", "c3RhcGVsaGFldXNjaGVu"],
+      "hint": "Benannt nach dem mittelalterlichen „Stapelrecht“.",
+      "solved": "<b>Stapelhaus</b> — richtig! 1558–1568 als Fischkauf- und Schlachthaus erbaut (am Fischmarkt). Der Name kommt vom mittelalterlichen „Stapelrecht“: Durchreisende Händler mussten ihre Waren hier erst drei Tage zum Verkauf anbieten.",
+      "link": "https://de.wikipedia.org/wiki/Stapelhaus",
+      "linkLabel": "Stapelhaus (Wikipedia)",
+      "maps": "Fischmarkt Köln",
+      "wayToNext": "Vom Fisch zum Heu — geht landeinwärts zum weiten Platz, über dem ein bronzener Reiter wacht."
+    },
+    {
+      "riddle": "Ein bronzener Reiter thront über dem Heumarkt, umringt von 16 Figuren am Sockel. Findet heraus (Tafel lesen oder Passant fragen): Welchen preußischen König stellt das Standbild dar? Voller Name mit Ordnungszahl!",
+      "accept": ["ZnJpZWRyaWNod2lsaGVsbWlpaQ==", "ZnJpZWRyaWNod2lsaGVsbTM=", "ZnJpZWRyaWNod2lsaGVsbWRlcmRyaXR0ZQ==", "a29lbmlnZnJpZWRyaWNod2lsaGVsbWlpaQ=="],
+      "hint": "Regierte Preußen 1797–1840, durch die Napoleonischen Kriege.",
+      "solved": "<b>Friedrich Wilhelm III.</b> — korrekt! Enthüllt 1878 von Kaiser Wilhelm I. persönlich. Die 16 überlebensgroßen Sockelfiguren zeigen Persönlichkeiten aus Kölns preußischer Zeit — der König war der erste von fünf preußischen Monarchen, unter denen Köln stand.",
+      "link": "https://www.koelntourismus.de/kunst-kultur/sehenswuerdigkeiten/detail/reiterstandbild-koenig-friedrich-wilhelm-iii",
+      "linkLabel": "Reiterstandbild (KölnTourismus)",
+      "maps": "Heumarkt Köln",
+      "wayToNext": "Wenige Schritte weiter ragt der gotische Turm der Stadtregierung empor — über und über mit steinernen Figuren besetzt."
+    },
+    {
+      "riddle": "Nur ein paar Schritte weiter ragt der gotische Rathausturm empor, über und über mit steinernen Kölner Persönlichkeiten besetzt. Wie viele Figuren zieren den Turm insgesamt? (Knifflig — clever raten oder eine Stadtführung belauschen.)",
+      "accept": ["MTI0"],
+      "hint": "Mehr als 100, weniger als 130. Vierte Figuren-Generation seit 2008.",
+      "solved": "<b>124 Figuren</b> — stark! Sie zeigen Kölner Persönlichkeiten aus 2000 Jahren; die heutige (vierte) Generation aus französischem Kalkstein steht seit 2008. An den unteren Konsolen hocken übrigens ein paar ziemlich freche Gestalten — eine davon sucht ihr gleich im Finale. 😏",
+      "link": "https://de.wikipedia.org/wiki/Liste_der_Kölner_Ratsturmfiguren",
+      "linkLabel": "Die 124 Ratsturmfiguren",
+      "maps": "Historisches Rathaus Köln",
+      "wayToNext": "Tretet um die Ecke auf den ältesten Platz der Stadt — dort wartet das Finale (und ein ziemlich frecher Geselle)."
+    },
+    {
+      "riddle": "Finale am Alter Markt, dem ältesten Platz der Stadt: Hoch oben an Haus Nr. 24 hockt ein frecher Kupfer-Kerl und zeigt der Obrigkeit sein blankes Hinterteil. Wie heißt diese wohl bekannteste obszöne Figur Kölns?",
+      "accept": ["a2FsbGVuZHJlc3Nlcg=="],
+      "hint": "Kölsch für „Rinnstein-Macher“ — geschaffen 1957 von Ewald Mataré.",
+      "solved": "🏁 <b>Der Kallendresser!</b> Der freche Kupferkerl an Haus Alter Markt 24 wurde 1957 von Bildhauer Ewald Mataré geschaffen — als Nachfolger eines älteren Reliefs. „Kallendresser“ ist kölsch für „Rinnstein-Sch…er“: Er zeigt der Obrigkeit (Richtung Rathaus) demonstrativ den blanken Hintern — ein Sinnbild kölscher Aufmüpfigkeit gegen jede Autorität. Um den Ursprung ranken sich mehrere Legenden. Quest gemeistert, ihr steht am <b>Alter Markt</b>! Gönnt euch ein Kölsch, macht ein Siegerfoto und sammelt die Truppe für den Abend. 🍺",
+      "link": "https://de.wikipedia.org/wiki/Kallendresser",
+      "linkLabel": "Kallendresser (Wikipedia)",
+      "maps": "Alter Markt Köln",
+      "final": true
+    }
+  ]
+}
