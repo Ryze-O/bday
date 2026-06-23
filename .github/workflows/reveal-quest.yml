@@ -1,0 +1,58 @@
+name: Reveal 3 — Köln-Quest (publish + ping)
+
+# Veröffentlicht zur Reveal-Zeit den GEHEIMEN Quest-Inhalt (aus Secret REVEAL_QUEST)
+# als reveal/quest.json und postet danach einen Discord-Ping mit Link (für Nachzügler).
+# Vorher existiert die Datei NICHT -> die Seite zeigt nur einen Teaser (Ziel bleibt geheim).
+#
+# Reveal: Sa 11.07.2026, 14:00 Köln (CEST) = 12:00 UTC -> cron "0 12 11 7 *".
+# (GitHub-Cron läuft in UTC; Köln im Sommer = UTC + 2.)
+#
+# Sicherer Test ohne Spoiler: Actions -> diesen Workflow -> "Run workflow" ->
+# dry_run = true. Schreibt dann reveal/test.json und postet NICHTS in Discord.
+
+on:
+  schedule:
+    - cron: "0 12 11 7 *"     # 12:00 UTC = 14:00 Köln  (ANPASSEN, falls Zeit sich ändert)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Test: schreibt reveal/test.json, KEIN Discord-Ping"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  reveal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quest-JSON veröffentlichen
+        env:
+          PAYLOAD: ${{ secrets.REVEAL_QUEST }}
+          DRY: ${{ github.event.inputs.dry_run }}
+        run: |
+          if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_QUEST fehlt."; exit 1; fi
+          mkdir -p reveal
+          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/quest.json"; fi
+          printf '%s' "$PAYLOAD" > "$TARGET"
+          jq . "$TARGET" > /dev/null   # JSON validieren
+          git config user.name "bday-bot"
+          git config user.email "bday-bot@users.noreply.github.com"
+          git add "$TARGET"
+          git commit -m "Reveal: $TARGET veröffentlicht" || { echo "nichts zu committen"; exit 0; }
+          git push
+
+      - name: Discord-Ping
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PAGE_URL: "https://ryze-o.github.io/bday/"
+        run: |
+          if [ -z "$WEBHOOK" ]; then echo "::error::Secret DISCORD_WEBHOOK_URL fehlt."; exit 1; fi
+          MESSAGE="@everyone 🗺️ **Die Köln-Quest ist freigeschaltet!** Wer noch unterwegs ist: Los geht's auf der Seite — $PAGE_URL 🤫"
+          curl -fsS -H "Content-Type: application/json" \
+            -d "$(jq -nc --arg c "$MESSAGE" '{content:$c, allowed_mentions:{parse:["everyone"]}}')" \
+            "$WEBHOOK"
