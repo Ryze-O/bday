@@ -366,7 +366,7 @@ a{color:inherit}
   <section class="section wrap" id="programm">
     <p class="kicker">Das Wochenende</p>
     <h2>Der Plan</h2>
-    <p class="lead">Drei Tage, ein Ort: Köln. Kommt vorbei, wann ihr könnt — die Fixpunkte sind das Frühstück und das Quiz am Samstag.</p>
+    <p class="lead">Drei Tage, ein Ort: Köln. Kommt vorbei, wann ihr könnt — die Fixpunkte sind das Frühstück und das Abendessen am Samstag.</p>
 
     <div class="days">
 
@@ -439,7 +439,7 @@ a{color:inherit}
               </a>
             </div>
           </div>
-          <!-- ===== GEHEIM (1/2): Escape Room. Inhalt nur in CONFIG.secrets[0], -->
+          <!-- ===== GEHEIM (1/2): Inhalt nur in CONFIG.secrets[0], -->
           <!-- ===== enthüllt sich per JS zur eigenen Reveal-Zeit. ===== -->
           <div id="secret-slot-0"></div>
 
@@ -464,7 +464,7 @@ a{color:inherit}
             </div>
           </div>
 
-          <!-- ===== GEHEIM (2/2): Quiz. Inhalt nur in CONFIG.secrets[1]. ===== -->
+          <!-- ===== GEHEIM (2/2): Inhalt nur in CONFIG.secrets[1]. ===== -->
           <div id="secret-slot-1"></div>
           <div class="item">
             <div class="t tbd">spät</div>
@@ -613,12 +613,12 @@ const CONFIG = {
      pollt ab der Reveal-Zeit, bis die Datei da ist, und blendet sie dann ein. */
   secrets: [
     {
-      revealAtISO: "2026-07-11T12:00:00",   // 30 Min vor Escape Room (12:30)
+      revealAtISO: "2026-07-11T12:00:00",   // 30 Min vor Aktivität 1 (12:30)
       teaser: "Mittags wartet die <b>erste Überraschung</b> auf euch. 🤫",
       src: "reveal/escape.json"
     },
     {
-      revealAtISO: "2026-07-11T20:00:00",   // 30 Min vor Quiz (20:30)
+      revealAtISO: "2026-07-11T20:00:00",   // 30 Min vor Aktivität 2 (20:30)
       teaser: "Und abends folgt die <b>zweite Überraschung</b>. 🤫",
       src: "reveal/quiz.json"
     }
@@ -634,7 +634,7 @@ const CONFIG = {
     src: "reveal/quest.json"
   },
 
-  // Termine für den Kalender-Download (.ics) — SPOILERFREI (kein Quiz/Escape Room).
+  // Termine für den Kalender-Download (.ics) — SPOILERFREI (keine Überraschungen).
   // Floating local time im Format YYYYMMDDTHHMMSS (Europe/Berlin).
   events: [
     {
