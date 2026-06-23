@@ -1,7 +1,7 @@
 name: Reveal 2 — Quiz (publish + ping)
 
 # Veröffentlicht zur Reveal-Zeit den GEHEIMEN Inhalt (aus Secret REVEAL_QUIZ)
-# als reveal/quiz.json und postet danach den Discord-Ping.
+# als reveal/s2.json und postet danach den Discord-Ping.
 # Vorher existiert die Datei NICHT -> die Seite bleibt verschlossen (kein Spoiler im Quelltext).
 #
 # Reveal: Sa 11.07.2026, 20:00 Köln (CEST) = 18:00 UTC -> cron "0 18 11 7 *".
@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_QUIZ fehlt."; exit 1; fi
           mkdir -p reveal
-          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/quiz.json"; fi
+          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/s2.json"; fi
           printf '%s' "$PAYLOAD" > "$TARGET"
           jq . "$TARGET" > /dev/null   # JSON validieren
           git config user.name "bday-bot"

@@ -1,7 +1,7 @@
 name: Reveal 1 — Escape Room (publish + ping)
 
 # Veröffentlicht zur Reveal-Zeit den GEHEIMEN Inhalt (aus Secret REVEAL_ESCAPE)
-# als reveal/escape.json und postet danach den Discord-Ping.
+# als reveal/s1.json und postet danach den Discord-Ping.
 # Vorher existiert die Datei NICHT -> die Seite bleibt verschlossen (kein Spoiler im Quelltext).
 #
 # Reveal: Sa 11.07.2026, 12:00 Köln (CEST) = 10:00 UTC -> cron "0 10 11 7 *".
@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_ESCAPE fehlt."; exit 1; fi
           mkdir -p reveal
-          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/escape.json"; fi
+          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/s1.json"; fi
           printf '%s' "$PAYLOAD" > "$TARGET"
           jq . "$TARGET" > /dev/null   # JSON validieren
           git config user.name "bday-bot"

@@ -1,7 +1,7 @@
 name: Reveal 3 — Köln-Quest (publish + ping)
 
 # Veröffentlicht zur Reveal-Zeit den GEHEIMEN Quest-Inhalt (aus Secret REVEAL_QUEST)
-# als reveal/quest.json und postet danach einen Discord-Ping mit Link (für Nachzügler).
+# als reveal/s3.json und postet danach einen Discord-Ping mit Link (für Nachzügler).
 # Vorher existiert die Datei NICHT -> die Seite zeigt nur einen Teaser (Ziel bleibt geheim).
 #
 # Reveal: Sa 11.07.2026, 14:00 Köln (CEST) = 12:00 UTC -> cron "0 12 11 7 *".
@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ -z "$PAYLOAD" ]; then echo "::error::Secret REVEAL_QUEST fehlt."; exit 1; fi
           mkdir -p reveal
-          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/quest.json"; fi
+          if [ "$DRY" = "true" ]; then TARGET="reveal/test.json"; else TARGET="reveal/s3.json"; fi
           printf '%s' "$PAYLOAD" > "$TARGET"
           jq . "$TARGET" > /dev/null   # JSON validieren
           git config user.name "bday-bot"
