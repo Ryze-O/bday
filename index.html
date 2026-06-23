@@ -265,6 +265,16 @@ a{color:inherit}
   margin-top:.6em;font-size:.9rem;color:var(--ink-soft);
   border-left:2px solid var(--accent);padding-left:.8em;
 }
+.qway{
+  margin:.4em 0 1.1em;color:var(--ink);font-style:italic;
+  border-left:2px solid var(--accent);padding-left:.85em;
+}
+.qmaphint{
+  background:none;border:none;color:var(--ink-faint);font:inherit;font-size:.82rem;
+  cursor:pointer;margin-top:.7em;padding:0;text-decoration:underline;
+}
+.qmaphint:hover{color:var(--accent)}
+.qmaplink{margin-top:.6em}
 .qsolved .qstatus{color:var(--good);font-weight:600;font-size:.9rem;margin-bottom:.35em}
 .qsolved .qreveal{color:var(--ink-soft)}
 .qst.shake{animation:shake .4s}
@@ -615,14 +625,15 @@ const CONFIG = {
      Lösungen sind base64-kodiert (Normalisierung: lowercase, ä/ö/ü -> ae/oe/ue,
      ß -> ss, nur a-z0-9). Reihenfolge = laufbare Route. Frei änderbar. */
   quest: {
-    intro: "Eine Rätsel-Reise quer durch Kölns Altstadt: neun Stationen, jede gelöste Aufgabe schaltet die nächste frei — Finale am Alter Markt. Echte Vor-Ort-Recherche ist Teil des Spiels: hinschauen, zählen, Schilder lesen, Leute fragen. Tippt eure Antwort ein (Groß-/Kleinschreibung & Umlaute egal). Festhängen? Jede Station hat einen Tipp.",
+    intro: "Eine Rätsel-Reise quer durch Kölns Altstadt: neun Stationen, Finale am Alter Markt. Knifflig: Auch der Weg zur nächsten Station ist jedes Mal ein Rätsel — erst wenn ihr es knackt, wisst ihr, wohin. Vor Ort heißt es dann hinschauen, zählen, Schilder lesen, Leute fragen. Tippt eure Antwort ein (Groß-/Kleinschreibung & Umlaute egal). Festhängen? Jede Station hat einen Tipp und eine versteckte Karte.",
     stations: [
       {
         riddle: "Euer Start überragt alles. Wer schwindelfrei ist, erklimmt den Südturm: Wie viele Stufen trennen euch vom Ausblick? Wer unten bleibt, fragt jemanden mit müden Waden — oder grübelt, es ist eine berühmte kölsche Zahl.",
         accept: ["NTMz"],
         hint: "Mehr als 500, weniger als 550 — und ein beliebtes Köln-Souvenir-Motiv.",
-        solved: "<b>533 Stufen</b> — genau! Schwindelfrei? Dann runter, die Brücke ist direkt nebenan.",
-        maps: "Kölner Dom"
+        solved: "<b>533 Stufen</b> — genau! Schwindelfrei? Dann wieder runter.",
+        maps: "Kölner Dom",
+        wayToNext: "Wendet euch dem Strom zu: Sucht das eiserne Bauwerk, an dem Verliebte ihre Treue mit tausenden Schlössern besiegeln — und stellt euch darauf."
       },
       // Station 2: FELD-AUFGABE (kein Code nötig, „weiter“-Button).
       // Wenn Ryze ein Schloss mit Code versteckt: "task" entfernen und z.B. accept:["<base64>"] setzen.
@@ -631,49 +642,56 @@ const CONFIG = {
         task: true,
         hint: "Die meisten Schlösser hängen auf der stromaufwärtigen Seite, etwa auf Brückenmitte.",
         solved: "Schloss gefunden, Foto im Kasten! Weiter über den Rhein und hinein in die City.",
-        maps: "Hohenzollernbrücke Köln"
+        maps: "Hohenzollernbrücke Köln",
+        wayToNext: "Zurück ans linke Ufer und hinein in die Gassen. Euer Ziel trägt „Glocken“ im Namen — dort wohnt seit jeher Kölns berühmtester Duft."
       },
       {
         riddle: "Köln schenkte der Welt ein berühmtes Duftwasser. Findet das Stammhaus in der Glockengasse: Über dem Eingang prangt eine legendäre Nummer, die zum Synonym für „Eau de Cologne“ wurde. Wie lautet sie?",
         accept: ["NDcxMQ=="],
         hint: "Vierstellig. Angeblich die Hausnummer, die ein französischer Besatzungssoldat 1794 vergab.",
         solved: "<b>4711</b> — na klar! Das weltberühmte Kölnisch Wasser, Glockengasse 4711.",
-        maps: "4711 Glockengasse Köln"
+        maps: "4711 Glockengasse Köln",
+        wayToNext: "Folgt der Nase zum traditionsreichen Brauhaus „Am Hof“. Davor sprudelt ein Brunnen, der an heimliche nächtliche Helfer erinnert."
       },
       {
         riddle: "Vor einem berühmten Brauhaus (Am Hof) erinnert ein Brunnen an Kölns fleißigste Helfer, die nachts heimlich alle Arbeit erledigten — bis eine neugierige Schneidersfrau sie vertrieb. Womit brachte sie die kleinen Kerle zu Fall? (Ein Wort.)",
         accept: ["ZXJic2Vu","ZXJic2U="],
         hint: "Etwas Rundes, Hartes auf der Treppe — die Wichtel rutschten aus.",
         solved: "<b>Erbsen</b> — richtig! Die beleidigten Heinzelmännchen blieben seither für immer weg.",
-        maps: "Heinzelmännchenbrunnen Köln"
+        maps: "Heinzelmännchenbrunnen Köln",
+        wayToNext: "Haltet zurück zum Rhein und steuert den viertürmigen romanischen Riesen an, der über den Altstadtdächern thront."
       },
       {
         riddle: "Ein wuchtiger romanischer Vierungsturm wacht über dem Martinsviertel. Schaut nach oben: Wie viele kleine Ecktürmchen umstehen den großen Turm?",
         accept: ["NA==","dmllcg=="],
         hint: "An jeder Ecke genau eins.",
         solved: "<b>Vier</b> Ecktürmchen — korrekt! 75 m hoch, erbaut auf den Mauern eines römischen Lagerhauses (Groß St. Martin).",
-        maps: "Groß St. Martin Köln"
+        maps: "Groß St. Martin Köln",
+        wayToNext: "Nur wenige Schritte zum Wasser: Sucht den bunten kleinen Platz, auf dem einst Heringe und Stockfisch feilgeboten wurden."
       },
       {
         riddle: "Am bunten Plätzchen direkt am Rhein, wo einst mit Hering und Stockfisch gehandelt wurde, steht ein historisches Haus mit grazilem Treppenturm. Wie heißt dieses Gebäude? (Notfalls jemanden fragen oder ein Schild suchen.)",
         accept: ["c3RhcGVsaGF1cw==","c3RhcGVsaGFldXNjaGVu"],
         hint: "Benannt nach dem mittelalterlichen „Stapelrecht“.",
         solved: "<b>Stapelhaus</b> — richtig! 1558–1568 als Fischkauf- und Schlachthaus erbaut (am Fischmarkt).",
-        maps: "Fischmarkt Köln"
+        maps: "Fischmarkt Köln",
+        wayToNext: "Vom Fisch zum Heu — geht landeinwärts zum weiten Platz, über dem ein bronzener Reiter wacht."
       },
       {
         riddle: "Ein bronzener Reiter thront über dem Heumarkt, umringt von 16 Figuren am Sockel. Findet heraus (Tafel lesen oder Passant fragen): Welchen preußischen König stellt das Standbild dar? Voller Name mit Ordnungszahl!",
         accept: ["ZnJpZWRyaWNod2lsaGVsbWlpaQ==","ZnJpZWRyaWNod2lsaGVsbTM=","ZnJpZWRyaWNod2lsaGVsbWRlcmRyaXR0ZQ==","a29lbmlnZnJpZWRyaWNod2lsaGVsbWlpaQ=="],
         hint: "Regierte Preußen 1797–1840, durch die Napoleonischen Kriege.",
         solved: "<b>Friedrich Wilhelm III.</b> — korrekt! Enthüllt 1878 von Kaiser Wilhelm I. persönlich.",
-        maps: "Heumarkt Köln"
+        maps: "Heumarkt Köln",
+        wayToNext: "Wenige Schritte weiter ragt der gotische Turm der Stadtregierung empor — über und über mit steinernen Figuren besetzt."
       },
       {
         riddle: "Nur ein paar Schritte weiter ragt der gotische Rathausturm empor, über und über mit steinernen Kölner Persönlichkeiten besetzt. Wie viele Figuren zieren den Turm insgesamt? (Knifflig — clever raten oder eine Stadtführung belauschen.)",
         accept: ["MTI0"],
         hint: "Mehr als 100, weniger als 130. Vierte Figuren-Generation seit 2008.",
         solved: "<b>124 Figuren</b> — stark! Und an einer Konsole hockt eine ziemlich freche Gestalt … die sucht ihr gleich im Finale. 😏",
-        maps: "Historisches Rathaus Köln"
+        maps: "Historisches Rathaus Köln",
+        wayToNext: "Tretet um die Ecke auf den ältesten Platz der Stadt — dort wartet das Finale (und ein ziemlich frecher Geselle)."
       },
       {
         riddle: "Finale am Alter Markt, dem ältesten Platz der Stadt: Hoch oben an Haus Nr. 24 hockt ein frecher Kupfer-Kerl und zeigt der Obrigkeit sein blankes Hinterteil. Wie heißt diese wohl bekannteste obszöne Figur Kölns?",
@@ -945,6 +963,7 @@ const CONFIG = {
   var n = q.stations.length;
   var mapSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
   if (introEl) introEl.textContent = q.intro;
+  var arrived = false;   // transiente Navigations-Phase (nicht gespeichert)
 
   function norm(s){
     return String(s).toLowerCase()
@@ -980,22 +999,34 @@ const CONFIG = {
         div.innerHTML =
           '<div class="qnum">' + label + ' · gelöst ✓</div>' +
           '<div class="qreveal" style="margin-top:.5em">' + st.solved + '</div>' +
-          (st.maps ? '<div style="margin-top:.6em">' + mapLink(st.maps) + '</div>' : '');
+          ((i === n - 1 && st.maps) ? '<div style="margin-top:.6em">' + mapLink(st.maps) + '</div>' : '');
       } else if (i === solved){
         div.classList.add("active");
-        var control = st.task
-          ? '<div class="qform"><button type="button" class="btn qnext">Erledigt — weiter ➜</button></div>'
-          : '<div class="qform">' +
-              '<input type="text" placeholder="Antwort eingeben …" autocomplete="off" aria-label="Antwort">' +
-              '<button type="button" class="btn qcheck">Prüfen</button>' +
-            '</div><div class="qwrong"></div>';
-        var hintHtml = st.hint
-          ? '<button type="button" class="qhint">💡 Tipp anzeigen</button><div class="qhinttext" hidden>' + st.hint + '</div>'
-          : '';
-        div.innerHTML =
-          '<div class="qnum">' + label + '</div>' +
-          '<div class="qriddle">' + st.riddle + '</div>' +
-          control + hintHtml;
+        var prev = i > 0 ? q.stations[i - 1] : null;
+        if (prev && prev.wayToNext && !arrived){
+          // NAVIGATIONS-PHASE: erst das Weg-Rätsel zur nächsten Station lösen
+          div.innerHTML =
+            '<div class="qnum">Weg zu ' + label + '</div>' +
+            '<div class="qway">🧭 ' + prev.wayToNext + '</div>' +
+            '<div class="qform"><button type="button" class="btn qarrived">Angekommen — Aufgabe zeigen ➜</button></div>' +
+            '<button type="button" class="qmaphint">📍 Karte zeigen (Tipp)</button>' +
+            '<div class="qmaplink" hidden>' + (st.maps ? mapLink(st.maps) : "") + '</div>';
+        } else {
+          // AUFGABEN-PHASE: vor Ort die Station lösen
+          var control = st.task
+            ? '<div class="qform"><button type="button" class="btn qnext">Erledigt — weiter ➜</button></div>'
+            : '<div class="qform">' +
+                '<input type="text" placeholder="Antwort eingeben …" autocomplete="off" aria-label="Antwort">' +
+                '<button type="button" class="btn qcheck">Prüfen</button>' +
+              '</div><div class="qwrong"></div>';
+          var hintHtml = st.hint
+            ? '<button type="button" class="qhint">💡 Tipp anzeigen</button><div class="qhinttext" hidden>' + st.hint + '</div>'
+            : '';
+          div.innerHTML =
+            '<div class="qnum">' + label + '</div>' +
+            '<div class="qriddle">' + st.riddle + '</div>' +
+            control + hintHtml;
+        }
       } else {
         div.classList.add("locked");
         div.innerHTML =
@@ -1008,9 +1039,16 @@ const CONFIG = {
       var reset = document.createElement("button");
       reset.className = "qreset";
       reset.textContent = "Quest zurücksetzen";
-      reset.addEventListener("click", function(){ setSolved(0); render(); });
+      reset.addEventListener("click", function(){ setSolved(0); arrived = false; render(); });
       host.appendChild(reset);
     }
+    host.querySelectorAll(".qmaphint").forEach(function(b){
+      b.addEventListener("click", function(){
+        var box = b.nextElementSibling;
+        if (box){ box.hidden = false; }
+        b.hidden = true;
+      });
+    });
     wireActive();
   }
 
@@ -1019,6 +1057,13 @@ const CONFIG = {
     if (!active) return;
     var idx = solvedCount();
     var st = q.stations[idx];
+
+    // Navigations-Phase: "Angekommen" -> Aufgabe einblenden
+    var arrivedBtn = active.querySelector(".qarrived");
+    if (arrivedBtn){
+      arrivedBtn.addEventListener("click", function(){ arrived = true; render(); });
+      return;
+    }
 
     var hintBtn = active.querySelector(".qhint");
     if (hintBtn){
@@ -1031,6 +1076,7 @@ const CONFIG = {
 
     function advance(){
       setSolved(idx + 1);
+      arrived = false;
       render();
       var act = host.querySelector(".qst.active");
       if (act){ act.scrollIntoView({ behavior: "smooth", block: "center" }); }
